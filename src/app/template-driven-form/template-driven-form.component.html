@@ -1,0 +1,106 @@
+<h1>Template Driven Form</h1>
+<div class="container">
+    <h1>Form</h1>
+    <form #contactForm="ngForm"  (submit)="onSubmit(contactForm)" >
+        <p>
+            <label for="firstname">FirstName: </label>
+            <input type="text" id="firstname" name="firstname" #firstName="ngModel" [(ngModel)]="contact.firstName" required minlength="6"> <br>
+            <span *ngIf="!firstName.valid && (firstName.touched || firstName.dirty) " class="text-danger">
+                <span *ngIf="firstName.errors?.['minlength']">
+                    Minimun 6 characters is required
+                </span>
+                <span *ngIf="firstName.errors?.['required']">
+                    Invalid Input
+                </span>
+            </span>
+        </p>
+
+        <p>
+            <label for="lastname">LastName: </label>
+            <input type="text" name="lastname" id="lastname" #lastname="ngModel" [(ngModel)]="contact.lastName" required maxlength="10"> <br>
+            <span *ngIf="!lastname.valid && lastname.dirty " class="text-danger">
+                <span *ngIf="lastname.errors?.['maxlength']">
+                    Maximun characters in 10
+                </span>
+                <span *ngIf="lastname.errors?.['required']">
+                    Invalid Input
+                </span>
+            </span>
+        </p>
+
+        <p>
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email" #email="ngModel" [(ngModel)]="contact.email" required> <br>
+            <span *ngIf="!email.valid && email.dirty" class="text-danger">
+                <span *ngIf="email.errors?.['required']">
+                    Invalid Input
+                </span>
+            </span>
+        </p>
+
+        <p>
+            <label for="gender">Gender: </label>
+            <input type="radio" name="gender" id="gender" value="male" [(ngModel)]="contact.gender" #gender="ngModel" required>  Male
+            <input type="radio" name="gender" id="gender" value="female" [(ngModel)]="contact.gender" #gender="ngModel" required>  Female
+            <br>
+            <span *ngIf="!gender.valid && (gender.dirty || gender.touched)" class="text-danger">
+                <span *ngIf="gender.errors?.['required']">
+                    Select Gender
+                </span>
+            </span>
+        </p>
+
+        <p>
+            <label for="marital">Marital Status: </label>
+            <input type="checkbox" name="married" id="marital" [(ngModel)]="contact.maritalStatus" >
+        </p>
+
+        <p>
+            <label for="country">Select Country: </label>
+            <select name="country" id="country" #country="ngModel" [(ngModel)]="contact.country" required>
+                <option value="">Select</option>
+                <option *ngFor="let country of countryList" [value]="country.id">{{ country.name }}</option>
+            </select>     <br>
+            <span *ngIf="!country.valid && country.touched" class="text-danger">
+                <span *ngIf="country.errors?.['required']">
+                    Select Country  
+                </span>
+            </span>       
+        </p>
+
+        <div ngModelGroup="address" >
+            <p>
+                <label for="street">Street: </label>
+                <input type="text" name="street" id="street" #street="ngModel" [(ngModel)]="contact.address.street" required> <br>
+                <span *ngIf="!street.valid && street.dirty" class="text-danger">
+                    <span *ngIf="street.errors?.['required']">
+                        Invalid Input
+                    </span>
+                </span>
+            </p>
+            
+            <p>
+                <label for="city">City: </label>
+                <input type="text" name="city" id="city" #city="ngModel" [(ngModel)]="contact.address.city" required> <br>
+                <span *ngIf="!city.valid && city.dirty" class="text-danger">
+                    <span *ngIf="city.errors?.['required']">
+                        Invalid Input
+                    </span>
+                </span>
+            </p>
+
+            <p>
+                <label for="pincode">Pincode: </label>
+                <input type="text" name="pincode" id="pincode" #pincode="ngModel" [(ngModel)]="contact.address.pincode" required> <br>
+                <span *ngIf="!pincode.valid && pincode.dirty" class="text-danger">
+                    <span *ngIf="pincode.errors?.['required']" class="text-danger">
+                        Invalid Input
+                    </span>
+                </span>
+            </p>
+        </div>
+        <div class="button">
+            <button [disabled]="!contactForm.valid">Submit</button>
+        </div>
+    </form>
+</div>

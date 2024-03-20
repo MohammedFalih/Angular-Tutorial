@@ -1,0 +1,48 @@
+<div class="adduser">
+    <h1>Add User</h1>
+    <form [formGroup]="userform" action="" method="post" (submit)="onSubmit()">
+        <label for="name">Name: </label><br>
+        <input type="text" name="name" id="name" formControlName="name">
+        <br>    
+        <label for="username"> Username: </label><br>
+        <input type="text" name="username" id="username" formControlName="username">
+        <br>
+        <label for="email">Email</label><br>
+        <input type="email" name="email" id="email" formControlName="email">
+        <br>
+        <label for="phone">Phone number: </label><br>
+        <input type="text" name="phone" id="phone" formControlName="phone">
+        <br><br>
+        <button>Submit</button>
+    </form>
+</div>
+<h1>User Details</h1>
+<div class="list">
+    <h3>User List</h3>
+    <ul>
+        <li *ngFor="let user of users">{{user.name}}</li>
+    </ul>
+</div>
+
+<div class="panel-body">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.name}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

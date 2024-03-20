@@ -1,0 +1,121 @@
+<h1>Reactive Form  </h1>
+<div class="container">
+    <h1>Form</h1>
+    <form [formGroup]="contactForm" (submit)="onSubmit()">
+        <p>
+            <label for="firstname">FirstName: </label>
+            <input type="text" id="firstname" name="firstname" formControlName="firstName">
+            <br>
+            <span class="text-danger" *ngIf="!firstname?.valid && firstname?.dirty">
+                <span *ngIf="firstname?.errors?.['required']">
+                    Firstname is required
+                </span>
+                <span *ngIf="firstname?.errors?.['minlength']">
+                    Minimum length is 8 characters!
+                </span>
+            </span>
+        </p>
+
+        <p>
+            <label for="lastname">LastName: </label>
+            <input type="text" name="lastname" id="lastname" formControlName="lastName">
+            <br>
+            <span class="text-danger" *ngIf="!lastname?.valid && lastname?.dirty">
+                <span *ngIf="lastname?.errors?.['required']">
+                    Lastname is required
+                </span>
+                <span *ngIf="lastname?.errors?.['maxlength']"> 
+                    Maximum length is 10 characters!
+                </span>
+            </span>
+        </p>
+
+        <p>
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email" formControlName="email"> 
+            <br>
+            <span class="text-danger" *ngIf="!email?.valid && email?.dirty">
+                <span *ngIf="email?.errors?.['required']">
+                    Email is required!
+                </span>
+                <span *ngIf="email?.errors?.['minlength']">
+                    Minimum length is 10 characters
+                </span>
+            </span> 
+        </p>
+
+        <p>
+            <label for="gender">Gender: </label>
+            <input type="radio" name="gender" id="gender" value="male" formControlName="gender">  Male
+            <input type="radio" name="gender" id="gender" value="female" formControlName="gender">  Female
+            <br>
+            <span class="text-danger" *ngIf="!gender?.valid && gender?.dirty">
+                <span *ngIf="gender?.errors?.['required']">
+                    Select gender
+                </span>
+            </span>
+        </p>
+
+        <p>
+            <label for="marital">Marital Status: </label>
+            <input type="checkbox" name="married" id="marital" formControlName="isMarried">
+        </p>
+
+        <p>
+        
+            <label for="country">Select Country:  </label>
+            <select name="country" id="country" formControlName="country">
+                <option value="">Select</option>
+                <option *ngFor="let country of countryList" [value]="country.id">{{ country.name }}</option>
+            </select>            
+            <br>
+            <span class="text-danger" *ngIf="!country?.valid && country?.dirty">
+                <span *ngIf="country?.errors?.['required']">
+                    Select country
+                </span>
+            </span>
+        </p>
+
+        <div formGroupName="address" >
+            <p>
+                <label for="street">Street: </label>
+                <input type="text" name="street" id="street" formControlName="street">
+                <br>
+                <span class="text-danger" *ngIf="!street?.valid && street?.dirty">
+                    <span *ngIf="street?.errors?.['required']">
+                        This field is required!
+                    </span>
+                    <span *ngIf="street?.errors?.['minlength']">
+                        Minimum length is 10 characters!
+                    </span>
+                </span>
+            </p>
+            
+            <p>
+                <label for="city">City: </label>
+                <input type="text" name="city" id="city" formControlName="city">
+                <br>
+                <span class="text-danger" *ngIf="!city?.valid && city?.dirty">
+                    <span *ngIf="city?.errors?.['required']">
+                        This field is required
+                    </span>
+                </span>
+            </p>
+
+            <p>
+                <label for="pincode">Pincode: </label>
+                <input type="text" name="pincode" id="pincode" formControlName="pincode">
+                <br>
+                <span class="text-danger" *ngIf="!pincode?.valid && pincode?.dirty">
+                    <span *ngIf="pincode?.errors?.['required']">
+                        This field is required
+                    </span>
+                </span>
+            </p>
+        </div>
+        <div class="button">
+            <button [disabled]="!contactForm.valid">Submit</button>
+        </div>
+        
+    </form>
+</div>
